@@ -1,0 +1,20 @@
+{
+  "name": "resolve",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "corepack pnpm --parallel --filter @resolve/web --filter @resolve/api dev",
+    "build": "corepack pnpm -r build",
+    "typecheck": "corepack pnpm -r typecheck",
+    "test": "corepack pnpm -r test",
+    "lint": "corepack pnpm -r lint",
+    "format": "corepack pnpm exec prettier --write apps packages .github package.json tsconfig.base.json pnpm-workspace.yaml README.md",
+    "format:check": "corepack pnpm exec prettier --check apps packages .github package.json tsconfig.base.json pnpm-workspace.yaml README.md"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "prettier": "^3.9.6",
+    "typescript": "^5.7.2"
+  }
+}
