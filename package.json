@@ -9,6 +9,7 @@
     "typecheck": "corepack pnpm -r typecheck",
     "test": "corepack pnpm -r test",
     "lint": "corepack pnpm -r lint",
+    "db:migrate": "corepack pnpm --filter @resolve/api db:migrate",
     "format": "corepack pnpm exec prettier --write apps packages .github package.json tsconfig.base.json pnpm-workspace.yaml README.md",
     "format:check": "corepack pnpm exec prettier --check apps packages .github package.json tsconfig.base.json pnpm-workspace.yaml README.md"
   },
