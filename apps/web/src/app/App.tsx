@@ -1,4 +1,5 @@
-import { Bell, ChevronDown, Command, LayoutDashboard, Plus, Search } from "lucide-react";
+import { Bell, BookOpen, ChevronDown, Command, LayoutDashboard, Plus, Search } from "lucide-react";
+import { useState } from "react";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { InboxPage } from "../features/tickets/InboxPage";
 import { TicketDetailPage } from "../features/tickets/TicketDetailPage";
@@ -11,6 +12,7 @@ import { SettingsPage } from "../features/settings/SettingsPage";
 import { DashboardPage } from "../features/dashboard/DashboardPage";
 import { AnalyticsPage } from "../features/analytics/AnalyticsPage";
 import { TeamPage } from "../features/team/TeamPage";
+import { TutorialDialog } from "../features/tutorial/TutorialDialog";
 
 const navigation = [
   ["dashboard", "/", LayoutDashboard],
@@ -35,6 +37,7 @@ function Placeholder({ title }: { title: string }) {
 export function App() {
   const { session, logout, selectOrganization } = useAuth();
   const { t } = useI18n();
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
   if (!session) return <AuthPage />;
   const organization = session.organizations.find((item) => item.id === session.organizationId)!;
   return (
@@ -83,6 +86,10 @@ export function App() {
             <span>{t("search")}</span>
             <kbd>⌘ K</kbd>
           </div>
+          <button className="tutorial-button" onClick={() => setIsTutorialOpen(true)}>
+            <BookOpen size={16} />
+            {t("tutorial")}
+          </button>
           <button className="icon-button" aria-label="Notifications">
             <Bell size={18} />
           </button>
@@ -108,6 +115,7 @@ export function App() {
             github.com/Guimoraiss
           </a>
         </footer>
+        {isTutorialOpen && <TutorialDialog onClose={() => setIsTutorialOpen(false)} />}
       </section>
     </div>
   );

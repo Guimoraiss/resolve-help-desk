@@ -43,6 +43,116 @@
   color: #8ab5ff;
   text-decoration: none;
 }
+.tutorial-button {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: #141414;
+  color: #d7d7d7;
+  padding: 0 11px;
+  font-size: 12px;
+}
+.tutorial-button:hover {
+  background: #1b1b1b;
+  color: #fff;
+}
+.tutorial-backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+}
+.tutorial-dialog {
+  position: relative;
+  width: min(100%, 590px);
+  max-height: min(700px, 90vh);
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9px;
+  background: #111;
+  padding: 30px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+.tutorial-dialog h2 {
+  margin: 0;
+  font-size: 25px;
+  letter-spacing: -0.04em;
+}
+.tutorial-lead {
+  color: #a2a2a2;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 10px 0 22px;
+}
+.tutorial-close {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  border: 0;
+  background: transparent;
+  color: #9a9a9a;
+  padding: 7px;
+}
+.tutorial-close:hover {
+  color: #fff;
+}
+.tutorial-steps {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tutorial-steps li {
+  display: grid;
+  grid-template-columns: 27px 1fr 18px;
+  gap: 10px;
+  align-items: start;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 15px 0;
+}
+.tutorial-steps li > span {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #cfe0ff;
+  background: #17345e;
+  font:
+    600 10px ui-monospace,
+    monospace;
+}
+.tutorial-steps strong {
+  font-size: 13px;
+}
+.tutorial-steps p {
+  color: #8d8d8d;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 5px 0 0;
+}
+.tutorial-steps svg {
+  color: #65c891;
+  margin-top: 2px;
+}
+.tutorial-credit {
+  color: #777;
+  font-size: 11px;
+  text-align: center;
+  margin: 18px 0;
+}
+.tutorial-credit a {
+  color: #8ab5ff;
+  text-decoration: none;
+}
 .page-subtitle {
   color: #969696;
   font-size: 14px;

@@ -2,30 +2,42 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { api } from "../../lib/api";
 import { TextField } from "../customers/CustomersPage";
 import { useI18n } from "../i18n/I18nProvider";
 
-type Customer = { id: string; name: string; email: string };
-const ticketSchema = z.object({
-  customerId: z.string().uuid("Choose a customer"),
-  title: z.string().min(3),
-  description: z.string().min(1),
-  priority: z.enum(["LOW", "NORMAL", "HIGH", "URGENT"]),
-});
-type TicketForm = z.infer<typeof ticketSchema>;
+type Customer = { id: string; name: string };
+type TicketForm = {
+  customerId: string;
+  title: string;
+  description: string;
+  priority: "LOW" | "NORMAL" | "HIGH" | "URGENT";
+};
 
 export function NewTicketPage({ organizationId }: { organizationId: string }) {
   const { t } = useI18n();
   const navigate = useNavigate();
+  const resolver = useMemo(
+    () =>
+      zodResolver(
+        z.object({
+          customerId: z.string().min(1, t("selectCustomerError")),
+          title: z.string().trim().min(3, t("ticketSubjectMin")),
+          description: z.string().trim().min(1, t("ticketDescriptionRequired")),
+          priority: z.enum(["LOW", "NORMAL", "HIGH", "URGENT"]),
+        }),
+      ),
+    [t],
+  );
   const customers = useQuery({
     queryKey: ["customers", organizationId],
     queryFn: () => api<{ customers: Customer[] }>("/customers", {}, organizationId),
   });
   const form = useForm<TicketForm>({
-    resolver: zodResolver(ticketSchema),
+    resolver,
     defaultValues: { customerId: "", title: "", description: "", priority: "NORMAL" },
   });
   const createTicket = useMutation({
@@ -52,7 +64,7 @@ export function NewTicketPage({ organizationId }: { organizationId: string }) {
               <option value="">{t("chooseCustomer")}</option>
               {customers.data?.customers.map((customer) => (
                 <option key={customer.id} value={customer.id}>
-                  {customer.name} · {customer.email}
+                  {customer.name}
                 </option>
               ))}
             </select>

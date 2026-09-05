@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { useMemo } from "react";
 import { z } from "zod";
 import { api } from "../../lib/api";
 import { useI18n } from "../i18n/I18nProvider";
@@ -11,22 +12,28 @@ type Customer = {
   companyName: string | null;
   country: string | null;
 };
-const customerSchema = z.object({
-  name: z.string().min(2),
-  companyName: z.string().optional(),
-  country: z.string().optional(),
-});
-type CustomerForm = z.infer<typeof customerSchema>;
+type CustomerForm = { name: string; companyName?: string; country?: string };
 
 export function CustomersPage({ organizationId }: { organizationId: string }) {
   const { t } = useI18n();
   const client = useQueryClient();
+  const resolver = useMemo(
+    () =>
+      zodResolver(
+        z.object({
+          name: z.string().trim().min(2, t("customerNameMin")),
+          companyName: z.string().optional(),
+          country: z.string().optional(),
+        }),
+      ),
+    [t],
+  );
   const customers = useQuery({
     queryKey: ["customers", organizationId],
     queryFn: () => api<{ customers: Customer[] }>("/customers", {}, organizationId),
   });
   const form = useForm<CustomerForm>({
-    resolver: zodResolver(customerSchema),
+    resolver,
     defaultValues: { name: "", companyName: "", country: "" },
   });
   const createCustomer = useMutation({

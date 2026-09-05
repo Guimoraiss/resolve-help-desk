@@ -453,6 +453,25 @@ Object.assign(translations["pt-BR"], {
   accessDemo: "Acessar demonstração",
   demoNote: "Este é um ambiente compartilhado de demonstração.",
   demoError: "Não foi possível abrir a demonstração.",
+  selectCustomerError: "Selecione um cliente.",
+  ticketSubjectMin: "O assunto precisa ter ao menos 3 caracteres.",
+  ticketDescriptionRequired: "Informe uma descrição.",
+  customerNameMin: "O nome precisa ter ao menos 2 caracteres.",
+  tutorial: "Como funciona",
+  tutorialTitle: "Conheça o Resolve em poucos passos",
+  tutorialLead:
+    "Este ambiente é uma demonstração compartilhada. Você pode explorar todos os recursos abaixo.",
+  tutorialStepOneTitle: "Adicione um cliente",
+  tutorialStepOneDescription: "Comece em Clientes cadastrando nome, empresa e país.",
+  tutorialStepTwoTitle: "Crie um ticket",
+  tutorialStepTwoDescription: "Use Novo ticket para registrar uma solicitação e definir a prioridade.",
+  tutorialStepThreeTitle: "Gerencie o atendimento",
+  tutorialStepThreeDescription:
+    "Na Caixa de entrada, assuma tickets, atualize o status e envie respostas ou notas internas.",
+  tutorialStepFourTitle: "Acompanhe os resultados",
+  tutorialStepFourDescription: "Painel e Análises mostram o volume e a distribuição dos tickets.",
+  closeTutorial: "Fechar tutorial",
+  startExploring: "Começar a explorar",
 });
 Object.assign(translations.en, {
   demoTitle: "Try the demo",
@@ -460,6 +479,24 @@ Object.assign(translations.en, {
   accessDemo: "Access demo",
   demoNote: "This is a shared demonstration environment.",
   demoError: "We could not open the demonstration.",
+  selectCustomerError: "Choose a customer.",
+  ticketSubjectMin: "The subject must contain at least 3 characters.",
+  ticketDescriptionRequired: "Enter a description.",
+  customerNameMin: "The name must contain at least 2 characters.",
+  tutorial: "How it works",
+  tutorialTitle: "Get to know Resolve in a few steps",
+  tutorialLead: "This is a shared demonstration environment. You can explore all features below.",
+  tutorialStepOneTitle: "Add a customer",
+  tutorialStepOneDescription: "Start in Customers by adding a name, company and country.",
+  tutorialStepTwoTitle: "Create a ticket",
+  tutorialStepTwoDescription: "Use New ticket to record a request and set its priority.",
+  tutorialStepThreeTitle: "Manage support",
+  tutorialStepThreeDescription:
+    "In Inbox, claim tickets, update their status and send replies or internal notes.",
+  tutorialStepFourTitle: "Track results",
+  tutorialStepFourDescription: "Dashboard and Analytics show ticket volume and distribution.",
+  closeTutorial: "Close tutorial",
+  startExploring: "Start exploring",
 });
 type I18nContextValue = { locale: Locale; setLocale(locale: Locale): void; t(key: string): string };
 const I18nContext = createContext<I18nContextValue | null>(null);
