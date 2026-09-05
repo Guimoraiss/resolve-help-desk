@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           user: CurrentUser;
           organization: Omit<Organization, "role">;
           membership: { role: Organization["role"] };
-        }>("/auth/demo", { method: "POST" });
+        }>("/auth/demo", { method: "POST", body: "{}" });
         setAccessToken(response.accessToken);
         const organization = { ...response.organization, role: response.membership.role };
         commit({ user: response.user, organizations: [organization], organizationId: organization.id });
