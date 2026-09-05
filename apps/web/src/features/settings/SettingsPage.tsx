@@ -4,7 +4,6 @@ import { useAuth } from "../auth/AuthProvider";
 import { useI18n, type Locale } from "../i18n/I18nProvider";
 
 type Preferences = {
-  email: boolean;
   browser: boolean;
   sound: boolean;
   compact: boolean;
@@ -14,7 +13,6 @@ const preferenceKey = "resolve.user-preferences";
 function readPreferences(): Preferences {
   try {
     return {
-      email: true,
       browser: false,
       sound: true,
       compact: false,
@@ -22,7 +20,7 @@ function readPreferences(): Preferences {
       ...JSON.parse(localStorage.getItem(preferenceKey) ?? "{}"),
     };
   } catch {
-    return { email: true, browser: false, sound: true, compact: false, reducedMotion: false };
+    return { browser: false, sound: true, compact: false, reducedMotion: false };
   }
 }
 
@@ -60,7 +58,6 @@ export function SettingsPage() {
             <span className="large-avatar">{session?.user.name.slice(0, 2).toUpperCase()}</span>
             <div>
               <strong>{session?.user.name}</strong>
-              <p>{session?.user.email}</p>
               <span>
                 {
                   session?.organizations.find((organization) => organization.id === session.organizationId)
@@ -99,11 +96,6 @@ export function SettingsPage() {
               <h2>{t("localPreferences")}</h2>
             </div>
           </div>
-          <Preference
-            label={t("emailNotifications")}
-            checked={preferences.email}
-            onChange={(value) => updatePreference("email", value)}
-          />
           <Preference
             label={t("browserNotifications")}
             checked={preferences.browser}

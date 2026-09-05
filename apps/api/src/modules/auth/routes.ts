@@ -2,7 +2,7 @@ import type { FastifyInstance } from "fastify";
 import { db } from "../../database/client.js";
 import { authenticate } from "../../shared/auth/authenticate.js";
 import { parseRequest } from "../../shared/http/parse-request.js";
-import { authenticateUser, registerUser } from "./service.js";
+import { authenticateUser, createDemoSession, registerUser } from "./service.js";
 import { loginSchema, registerSchema } from "./schemas.js";
 
 export async function authRoutes(app: FastifyInstance) {
@@ -22,6 +22,16 @@ export async function authRoutes(app: FastifyInstance) {
     const input = parseRequest(loginSchema, request.body);
     const user = await authenticateUser(db, input);
     return { accessToken: app.jwt.sign({ userId: user.id }), user: publicUser(user) };
+  });
+
+  app.post("/demo", async () => {
+    const result = await createDemoSession(db);
+    return {
+      accessToken: app.jwt.sign({ userId: result.user.id }),
+      user: publicUser(result.user),
+      organization: result.organization,
+      membership: result.membership,
+    };
   });
 
   app.get("/me", async (request) => ({ user: await authenticate(request) }));

@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import type { Database } from "../../database/client.js";
 import { memberships, organizations, users } from "../../database/schema/index.js";
@@ -40,6 +41,44 @@ export async function authenticateUser(database: Database, input: LoginInput) {
     throw new AppError("INVALID_CREDENTIALS", "Email or password is incorrect", 401);
   }
   return user;
+}
+
+export async function createDemoSession(database: Database) {
+  const demoEmail = "demo@resolve.local";
+  const demoSlug = "resolve-demo";
+  return database.transaction(async (transaction) => {
+    let [user] = await transaction.select().from(users).where(eq(users.email, demoEmail)).limit(1);
+    if (!user) {
+      const passwordHash = await bcrypt.hash(`demo-${randomUUID()}`, 12);
+      [user] = await transaction
+        .insert(users)
+        .values({ name: "Visitante demo", email: demoEmail, passwordHash })
+        .returning();
+    }
+    let [organization] = await transaction
+      .select()
+      .from(organizations)
+      .where(eq(organizations.slug, demoSlug))
+      .limit(1);
+    if (!organization) {
+      [organization] = await transaction
+        .insert(organizations)
+        .values({ name: "Resolve — demonstração", slug: demoSlug })
+        .returning();
+    }
+    let [membership] = await transaction
+      .select()
+      .from(memberships)
+      .where(eq(memberships.userId, user.id))
+      .limit(1);
+    if (!membership || membership.organizationId !== organization.id) {
+      [membership] = await transaction
+        .insert(memberships)
+        .values({ userId: user.id, organizationId: organization.id, role: "OWNER" })
+        .returning();
+    }
+    return { user, organization, membership };
+  });
 }
 
 function isUniqueViolation(error: unknown): error is { code: string } {

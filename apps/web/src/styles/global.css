@@ -9,6 +9,40 @@
   margin: 0 auto;
   padding: 42px 40px 72px;
 }
+.app-credit {
+  padding: 22px 40px;
+  color: #696969;
+  font-size: 11px;
+  text-align: center;
+}
+.app-credit a {
+  color: #8ab5ff;
+  text-decoration: none;
+}
+.app-credit a:hover {
+  text-decoration: underline;
+}
+.demo-card {
+  text-align: center;
+}
+.demo-card .brand {
+  justify-content: center;
+}
+.demo-note {
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 18px 0 0;
+}
+.auth-credit {
+  color: #777;
+  font-size: 11px;
+  margin: 26px 0 0;
+}
+.auth-credit a {
+  color: #8ab5ff;
+  text-decoration: none;
+}
 .page-subtitle {
   color: #969696;
   font-size: 14px;

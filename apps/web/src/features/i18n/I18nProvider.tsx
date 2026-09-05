@@ -447,6 +447,20 @@ Object.assign(translations.en, {
   admin: "Administrator",
   agent: "Agent",
 });
+Object.assign(translations["pt-BR"], {
+  demoTitle: "Teste a demonstração",
+  demoLead: "Explore clientes, tickets, painel e análises sem criar uma conta.",
+  accessDemo: "Acessar demonstração",
+  demoNote: "Este é um ambiente compartilhado de demonstração.",
+  demoError: "Não foi possível abrir a demonstração.",
+});
+Object.assign(translations.en, {
+  demoTitle: "Try the demo",
+  demoLead: "Explore customers, tickets, dashboards and analytics without creating an account.",
+  accessDemo: "Access demo",
+  demoNote: "This is a shared demonstration environment.",
+  demoError: "We could not open the demonstration.",
+});
 type I18nContextValue = { locale: Locale; setLocale(locale: Locale): void; t(key: string): string };
 const I18nContext = createContext<I18nContextValue | null>(null);
 const storageKey = "resolve.locale";

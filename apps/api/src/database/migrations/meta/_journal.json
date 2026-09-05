@@ -10,6 +10,13 @@
       "when": 1788440000002,
       "tag": "0002_messages_assignments_audit",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1788440000003,
+      "tag": "0003_optional_customer_email",
+      "breakpoints": true
     }
   ]
 }

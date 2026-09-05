@@ -63,7 +63,7 @@ export const customers = pgTable(
       .notNull()
       .references(() => organizations.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
-    email: text("email").notNull(),
+    email: text("email"),
     phone: text("phone"),
     companyName: text("company_name"),
     country: text("country"),

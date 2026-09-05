@@ -102,6 +102,12 @@ export function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<Placeholder title={t("comingSoon")} />} />
         </Routes>
+        <footer className="app-credit">
+          Developed by:{" "}
+          <a href="https://github.com/Guimoraiss" target="_blank" rel="noreferrer">
+            github.com/Guimoraiss
+          </a>
+        </footer>
       </section>
     </div>
   );

@@ -8,13 +8,11 @@ import { useI18n } from "../i18n/I18nProvider";
 type Customer = {
   id: string;
   name: string;
-  email: string;
   companyName: string | null;
   country: string | null;
 };
 const customerSchema = z.object({
   name: z.string().min(2),
-  email: z.string().email(),
   companyName: z.string().optional(),
   country: z.string().optional(),
 });
@@ -29,7 +27,7 @@ export function CustomersPage({ organizationId }: { organizationId: string }) {
   });
   const form = useForm<CustomerForm>({
     resolver: zodResolver(customerSchema),
-    defaultValues: { name: "", email: "", companyName: "", country: "" },
+    defaultValues: { name: "", companyName: "", country: "" },
   });
   const createCustomer = useMutation({
     mutationFn: (input: CustomerForm) =>
@@ -62,10 +60,7 @@ export function CustomersPage({ organizationId }: { organizationId: string }) {
               <div className="customer-avatar">{customer.name.slice(0, 2).toUpperCase()}</div>
               <div>
                 <strong>{customer.name}</strong>
-                <p>
-                  {customer.email}
-                  {customer.companyName ? ` · ${customer.companyName}` : ""}
-                </p>
+                {customer.companyName && <p>{customer.companyName}</p>}
               </div>
             </article>
           ))}
@@ -76,9 +71,6 @@ export function CustomersPage({ organizationId }: { organizationId: string }) {
           <form onSubmit={form.handleSubmit((input) => createCustomer.mutate(input))}>
             <TextField label={t("name")} error={form.formState.errors.name?.message}>
               <input {...form.register("name")} />
-            </TextField>
-            <TextField label={t("email")} error={form.formState.errors.email?.message}>
-              <input {...form.register("email")} type="email" />
             </TextField>
             <TextField label={t("company")}>
               <input {...form.register("companyName")} />

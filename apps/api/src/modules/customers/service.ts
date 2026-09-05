@@ -11,7 +11,7 @@ export async function createCustomer(database: Database, organizationId: string,
   try {
     const [customer] = await database
       .insert(customers)
-      .values({ ...input, organizationId })
+      .values({ ...input, email: null, organizationId })
       .returning();
     return customer;
   } catch (error) {
