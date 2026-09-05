@@ -69,15 +69,20 @@ export function App() {
             </NavLink>
           ))}
         </nav>
-        <button className="sidebar-footer" onClick={logout} title={t("signOut")}>
-          <span className="avatar">{session.user.name.slice(0, 2).toUpperCase()}</span>
-          <div>
-            <strong>{session.user.name}</strong>
-            <small>
-              {organization.role} · {t("signOut")}
-            </small>
-          </div>
-        </button>
+        <div className="sidebar-bottom">
+          <a className="sidebar-credit" href="https://github.com/Guimoraiss" target="_blank" rel="noreferrer">
+            Developed by: github.com/Guimoraiss
+          </a>
+          <button className="sidebar-footer" onClick={logout} title={t("signOut")}>
+            <span className="avatar">{session.user.name.slice(0, 2).toUpperCase()}</span>
+            <div>
+              <strong>{session.user.name}</strong>
+              <small>
+                {organization.role} · {t("signOut")}
+              </small>
+            </div>
+          </button>
+        </div>
       </aside>
       <section className="workspace">
         <header className="topbar">
@@ -109,12 +114,6 @@ export function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<Placeholder title={t("comingSoon")} />} />
         </Routes>
-        <footer className="app-credit">
-          Developed by:{" "}
-          <a href="https://github.com/Guimoraiss" target="_blank" rel="noreferrer">
-            github.com/Guimoraiss
-          </a>
-        </footer>
         {isTutorialOpen && <TutorialDialog onClose={() => setIsTutorialOpen(false)} />}
       </section>
     </div>

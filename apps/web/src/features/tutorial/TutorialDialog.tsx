@@ -36,12 +36,6 @@ export function TutorialDialog({ onClose }: { onClose(): void }) {
             </li>
           ))}
         </ol>
-        <p className="tutorial-credit">
-          Developed by:{" "}
-          <a href="https://github.com/Guimoraiss" target="_blank" rel="noreferrer">
-            github.com/Guimoraiss
-          </a>
-        </p>
         <button className="form-submit" onClick={onClose}>
           {t("startExploring")}
         </button>

@@ -9,19 +9,6 @@
   margin: 0 auto;
   padding: 42px 40px 72px;
 }
-.app-credit {
-  padding: 22px 40px;
-  color: #696969;
-  font-size: 11px;
-  text-align: center;
-}
-.app-credit a {
-  color: #8ab5ff;
-  text-decoration: none;
-}
-.app-credit a:hover {
-  text-decoration: underline;
-}
 .demo-card {
   text-align: center;
 }
@@ -142,16 +129,6 @@
 .tutorial-steps svg {
   color: #65c891;
   margin-top: 2px;
-}
-.tutorial-credit {
-  color: #777;
-  font-size: 11px;
-  text-align: center;
-  margin: 18px 0;
-}
-.tutorial-credit a {
-  color: #8ab5ff;
-  text-decoration: none;
 }
 .page-subtitle {
   color: #969696;
@@ -862,8 +839,22 @@ nav a:hover {
   background: #191919;
   color: #f7f7f7;
 }
-.sidebar-footer {
+.sidebar-bottom {
   margin-top: auto;
+}
+.sidebar-credit {
+  display: block;
+  padding: 10px 8px 12px;
+  color: #737373;
+  font-size: 10px;
+  line-height: 1.45;
+  text-align: center;
+  text-decoration: none;
+}
+.sidebar-credit:hover {
+  color: #8ab5ff;
+}
+.sidebar-footer {
   padding: 12px 8px 0;
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
